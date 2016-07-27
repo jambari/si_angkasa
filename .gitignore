@@ -1,0 +1,6 @@
+*.pyc
+__pycache__
+si_angkasa
+db.sqlite3
+/static
+.DB_store
