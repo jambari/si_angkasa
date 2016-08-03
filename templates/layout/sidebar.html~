@@ -1,0 +1,60 @@
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Beranda</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tata Usaha<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/tatausaha/atk">Alat Tulis Kantor</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/diklat">Diklat</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/satpam">Jadwal Dinas Satpam</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/listrik">Listrik</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/memo">Memo</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/pegawai">Pegawai</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/surat_keluar">Surat Keluar</a>
+                                </li>
+                                <li>
+                                    <a href="/tatausaha/surat_masuk">Surat Masuk</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                          <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Operaional <span class="fa arrow"></span></a>
+                          <ul class="nav nav-second-level">
+                            <li>
+                              <a href="/operasional/gempabumi">Gempabumi</a>
+                            </li>
+                            <li>
+                              <a href="/operasional/listrik_udara">Listrik Udara</a>
+                            </li>
+                            <li>
+                              <a href="/operasional/magnetbumi">Magnetbumi</a>
+                            </li>
+                            <li>
+                              <a href="/operasional/hujan">Hujan</a>
+                            </li>
+                            <li>
+                              <a href="/operasional/laporan">Laporan</a>
+                            </li>
+                          </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->

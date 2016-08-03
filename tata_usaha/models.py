@@ -95,10 +95,10 @@ class JenisAkun(models.Model):
         verbose_name_plural = 'Jenis Akun'
 
     def __unicode__(self):
-        return self.nama
+        return str(self.akun)
 
     def __str__(self):
-        return self.nama
+        return str(self.akun)
 
 
 
@@ -191,10 +191,10 @@ class ListrikMati(models.Model):
         verbose_name_plural = 'Listrik Mati'
 
     def __str__(self):
-        return self.tanggal
+        return str(self.tanggal)
 
     def __unicode__(self):
-        return self.tanggal
+        return str(self.tanggal)
 
 
 class Memo(models.Model):
