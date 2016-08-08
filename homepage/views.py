@@ -45,6 +45,7 @@ def adminhome(request):
     listrik = ListrikMati.objects.latest('tanggal')
     surat_keluar = SuratKeluar.objects.latest('tanggal')
     surat_masuk = SuratMasuk.objects.latest('tanggal')
+    user = request.session['username']
     return render(request, 'homepage/adminhome.html', {
         "precipitation": precipitation,
         "earthquake": earthquake,
@@ -55,5 +56,6 @@ def adminhome(request):
         "satpam": satpam,
         "listrik": listrik,
         "surat_keluar": surat_keluar,
-        "surat_masuk": surat_masuk
+        "surat_masuk": surat_masuk,
+        "user": user
     })

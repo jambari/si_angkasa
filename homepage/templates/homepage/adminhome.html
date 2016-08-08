@@ -15,12 +15,15 @@
   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="static/media/images/fortemplate/WVFRM.png" alt="hujan" height="242" width="200" />
+        <center><i class="wi wi-earthquake" id="icon-hujan"></i></center>
         <div class="caption">
-          <h3>Gempabumi Terkini</h3>
+          <h4>Gempabumi Terkini</h4>
           <p>
-            {{ earthquake.tanggal|date:"d-m-Y" }} {{ earthquake.origin_time|time:"hh-mm-ss" }} {{ earthquake.magnitudo }}
-             {{ earthquake.lintang }}
+            {{ earthquake.tanggal|date:"d-m-Y" }} {{ earthquake.origin_time|time:"hh-mm-ss" }}, M{{ earthquake.magnitudo }},
+             {{ earthquake.lintang }}, {{ earthquake.bujur }}, {{ earthquake.kedalaman }} km, {{ earthquake.remark }} </br>
+             {% if terasa %}
+              terasa
+             {% endif %}
           </p>
         </div>
       </div>
@@ -29,9 +32,9 @@
 
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <img src="static/media/images/fortemplate/Rain.png" alt="hujan" height="242" width="200" />
+        <center><i class="wi wi-sleet" id="icon-hujan"></i></center>
         <div class="caption">
-          <h3>Hujan hari ini</h3>
+          <h4>Hujan {{ precipitation.tanggal|date:"d-m-Y" }}</h4>
           <p>
             {{ precipitation.jumlah }} mm
           </p>
@@ -41,6 +44,19 @@
       <!--/.thumbnail-->
     </div>
     <!--/.rain-->
+
+    <!--lightning-->
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <center><i class="wi wi-lightning" id="icon-hujan"></i></center>
+        <div class="caption">
+          <h4>Ligtning {{ petir.tanggal|date:"d-m-Y" }}</h4>
+          <p>
+            Stroke: {{ petir.stroke }}, noise : {{ petir.noise }}, energy : {{ petir.energy }}
+          </p>
+        </div>
+      </div>
+    </div>
 
   </div>
 {% endblock content %}
