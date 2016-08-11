@@ -218,9 +218,14 @@ class Memo(models.Model):
 
 
 class JadwalDinasSatpam(models.Model):
+    KETERANGAN_CHOICES = (
+        ('Pagi', 'Pagi'),
+        ('Siang', 'Siang'),
+        ('Malam', 'Malam')
+    )
     tanggal = models.DateField(default=datetime.datetime.today)
     pegawai = models.ForeignKey(Pegawai)
-    keterangan = models.CharField(blank=True, max_length=100)
+    keterangan = models.CharField(blank=True, max_length=100, choices=KETERANGAN_CHOICES)
     petugas_entri = models.ForeignKey(User)
 
     class Meta:
@@ -228,10 +233,10 @@ class JadwalDinasSatpam(models.Model):
         verbose_name_plural = 'Jadwal Dinas Satpam'
 
     def __str__(self):
-        return self.tanggal
+        return str(self.tanggal)
 
     def __unicode__(self):
-        return self.tanggal
+        return str(self.tanggal)
 
 
 class TugasBelajar(models.Model):

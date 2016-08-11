@@ -120,3 +120,5 @@ class TugasBelajarAdmin(admin.ModelAdmin):
     search_fields = ['pegawai','program','jurusan','perguruan_tinggi','tahun_mulai','tahun_lulus']
     list_per_page = 25
     list_filter = ()
+
+admin.site.register(TugasBelajar, TugasBelajarAdmin)

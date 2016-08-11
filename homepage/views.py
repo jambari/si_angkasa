@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from tata_usaha.models import *
 from operasional.models import *
+from django.db.models.functions import Coalesce
+from django.utils import timezone
+from datetime import datetime, date
 # Create your views here.
 
 def login_view(request):
@@ -30,18 +33,19 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('/login/')
 
 
 @login_required(login_url=settings.LOGIN_URL)
 def adminhome(request):
+    hari = datetime.today()
     precipitation = Hujan.objects.latest('tanggal')
     earthquake = Gempabumi.objects.latest('tanggal')
-    laporan = Laporan.objects.latest('batas_waktu')
+    laporan = Laporan.objects.order_by(Coalesce('batas_waktu','penyusun').desc())[:3]
     petir = ListrikUdara.objects.latest('tanggal')
     magnetbumi = Magnetbumi.objects.latest('tanggal')
-    memo = Memo.objects.latest('tanggal')
-    satpam = JadwalDinasSatpam.objects.dates('tanggal', 'day')
+    memo = Memo.objects.order_by(Coalesce('tanggal','dari').desc())[:3]
+    satpam = JadwalDinasSatpam.objects.filter(tanggal__year=hari.year, tanggal__month=hari.month, tanggal__day=hari.day)
     listrik = ListrikMati.objects.latest('tanggal')
     surat_keluar = SuratKeluar.objects.latest('tanggal')
     surat_masuk = SuratMasuk.objects.latest('tanggal')

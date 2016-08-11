@@ -2,9 +2,9 @@
 {% block content %}
   <div class="row">
     <div class="col-md-12">
-      <h1 class="page-header">Produktifitas kita saat ini </h1>
+      <h1 class="page-header">Today's Log </h1>
       <ol class="breadcrumb" style="margin-bottom:5px;">
-          <li class="active">Beranda</li>
+          <li class="active"><i class="fa fa-home"></i> Beranda</li>
       </ol>
       <br/>
     </div>
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <center><i class="wi wi-earthquake" id="icon-hujan"></i></center>
+        <center><i class="wi wi-earthquake icon-hujan"></i></center>
         <div class="caption">
           <h4>Gempabumi Terkini</h4>
           <p>
@@ -32,7 +32,7 @@
 
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <center><i class="wi wi-sleet" id="icon-hujan"></i></center>
+        <center><i class="wi wi-sleet icon-hujan" ></i></center>
         <div class="caption">
           <h4>Hujan {{ precipitation.tanggal|date:"d-m-Y" }}</h4>
           <p>
@@ -48,7 +48,7 @@
     <!--lightning-->
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <center><i class="wi wi-lightning" id="icon-hujan"></i></center>
+        <center><i class="wi wi-lightning icon-hujan"></i></center>
         <div class="caption">
           <h4>Ligtning {{ petir.tanggal|date:"d-m-Y" }}</h4>
           <p>
@@ -58,5 +58,293 @@
       </div>
     </div>
 
+  </div>
+{% comment %}
+  Laporan
+{% endcomment %}
+  <div class="row">
+    {% if laporan %}
+    <div class="col-sm-6 col-md-12 ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title"> <i class="fa fa-book" aria-hidden="True"></i> Laporan</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered table-hover table-reort-down ">
+            <tbody>
+              <tr>
+                <td>No</td>
+                <td>Nama Laporan</td>
+                <td>
+                  Batas Waktu
+                </td>
+                <td>
+                  Penyusun
+                </td>
+                <td>
+                  Status
+                </td>
+              </tr>
+              {% for laporan in laporan %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>{{ laporan.nama }} </td>
+                <td>
+                  {{ laporan.batas_waktu|date:"d-m-Y" }}
+                </td>
+                <td>
+                  {{ laporan.penyusun }}
+                </td>
+                <td>
+                  {% if laporan.status %}
+                    <center><span class="label label-success">Sudah</span></center>
+                  {% else %}
+                    <center><span class="label label-danger">Belum</span></center>
+                  {% endif %}
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+{% comment %}
+  below is for memo
+{% endcomment %}
+
+  <div class="row">
+    {% if memo %}
+    <div class="col-sm-6 col-md-12 ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title"> <i class="fa fa-wpforms" aria-hidden="True"></i> Memo</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered table-hover table-responsive">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>
+                  Judul
+                </th>
+                <td>
+                  dari
+                </th>
+                <th>
+                  kepada
+                </th>
+                <th>
+                  isi memo
+                </th>
+                <th>
+                  status
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for memo in memo %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>{{ memo.tanggal|date:"d-m-Y" }} </td>
+                <td>
+                  {{ memo.judul }}
+                </td>
+                <td>
+                  {{ memo.dari }}
+                </td>
+                <td>
+                  {{ memo.kepada }}
+                </td>
+                <td>
+                  {{ memo.isi_memo}}
+                </td>
+                <td>
+                  {% if memo.status %}
+                    <center><span class="label label-success">Sudah</span></center>
+                  {% else %}
+                    <center><span class="label label-danger">Belum</span></center>
+                  {% endif %}
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+{% comment %}
+  below is for SHift
+{% endcomment %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title"> <i class="fa fa-lock"></i> Petugas hari ini </h1>
+        </div>
+        <div class="panel-body">
+          {% if satpam %}
+            {% for satpam in satpam %}
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  {% if satpam.keterangan == "Pagi" %}
+                    <center><i class="wi wi-time-6 icon-hujan"></i></center>
+                  {% endif %}
+                  {% if satpam.keterangan == "Siang" %}
+                    <center><i class="wi wi-time-2 icon-hujan"></i></center>
+                  {% endif %}
+                  {% if satpam.keterangan == "Malam" %}
+                    <center><i class="wi wi-time-8 icon-hujan"></i></center>
+                  {% endif %}
+                  <div class="caption">
+                    <center>
+                      <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-success">{{ satpam.pegawai }}</button>
+                        <button type="button" class="btn btn-success">{{ satpam.keterangan }}</button>
+                      </div>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+      Surat keluar, Surat masuk, Listrik
+    {% endcomment %}
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title"> <i class="fa fa-send"></i> Surat Keluar</h1>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <i class="fa fa-envelope-square"></i>
+                  </td>
+                  <td>
+                    {{ surat_keluar.nomor_surat}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </td>
+                  <td>
+                    {{ surat_keluar.perihal }}
+                  </td>
+                </tr>
+                <tr>
+                <td>
+                  <i class="fa fa-arrow-right"></i>
+                </td>
+                <td>
+                  {{ surat_keluar.tujuan }}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-envelope"></i> Surat Masuk</h1>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <i class="fa fa-envelope-square"></i>
+                  </td>
+                  <td>
+                    {{ surat_masuk.nomor_surat}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </td>
+                  <td>
+                    {{ surat_masuk.perihal }}
+                  </td>
+                </tr>
+                <tr>
+                <td>
+                  <i class="fa fa-arrow-left"></i>
+                </td>
+                <td>
+                  {{ surat_masuk.dari }}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-plug"></i> Listrik Mati</h1>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <i class="fa fa-calendar"></i>
+                  </td>
+                  <td>
+                    {{ listrik.tanggal|date:"d-m-Y"}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-clock-o"></i>
+                  </td>
+                  <td>
+                    <label for="" class="label label-danger">
+                      {{ listrik.jam_mulai|time:"H:i:s" }}
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-clock-o"></i>
+                  </td>
+                  <td>
+                    <label for="" class="label label-success">
+                      {{ listrik.jam_berakhir|time:"H:i:s" }}
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock content %}
