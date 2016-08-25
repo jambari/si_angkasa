@@ -1,0 +1,99 @@
+{% extends "layout/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="title">Memo</h1>
+            <ol class="breadcrumb" style="margin-bottom:5px; ">
+                <li><a href="/"><i class="fa fa-home"></i> Beranda</a></li>
+                <li class="active">Memo</li>
+            </ol>
+            </br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><i class="fa fa-book"></i> Memo</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <form class="" action="/tatausaha/memo/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Bulan</label>
+                                <select class="" name="bulan" style="margin-right:15px;">
+                                    <option value="01">Januari</option>
+                                    <option value="02">Februari</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+
+                                <label for="">Tahun</label>
+                                <select class="" name="tahun" class="form-control" style="margin-right:15px;">
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                </select>
+
+                                <input type="submit" class="btn btn-primary" name="name" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                    <!--./form--->
+                    {% comment %}
+                    Bawah untuk list memo
+                    {% endcomment %}
+                    <div class="row">
+                        {% if memo %}
+                            {% for foo in memo %}
+                                <div class="col-md-4">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">{{ foo.judul }}</h1>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>{{ foo.isi_memo|truncatechars:30 }}<a href=""> <span class="fa fa-arrow-right"></span></a></p>
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <td>From</td>
+                                                    <td>{{ foo.dari }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>To</td>
+                                                    <td>{{ foo.kepada }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        <span class="label label-info">{{ foo.tanggal|date:"d-m-Y" }}</span>
+                                            {% if foo.status %}
+                                                <span class="label label-success">Sudah</span>
+                                            {% else %}
+                                                <span class="label label-danger">Belum</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        {% endif %}
+                    </div>
+                    <br>
+                    <a href="/tatausaha/jadwalsatpam/tambah/" class="btn btn-primary">tambah <i
+                            class="fa fa-plus-circle"></i></a>
+                </div>
+            </div>
+            <!--./panel-body--->
+        </div>
+    </div>
+    </div>
+{% endblock content %}

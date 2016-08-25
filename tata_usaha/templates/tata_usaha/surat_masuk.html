@@ -1,0 +1,88 @@
+{% extends "layout/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="title">Surat Masuk</h1>
+            <ol class="breadcrumb" style="margin-bottom:5px; ">
+                <li><a href="/"><i class="fa fa-home"></i> Beranda</a></li>
+                <li class="active">surat masuk</li>
+            </ol>
+            </br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><i class="fa fa-envelope"> Daftar surat masuk</i></h1>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <form class="" action="/tatausaha/suratmasuk/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Bulan</label>
+                                <select class="" name="bulan" style="margin-right:15px;">
+                                    <option value="01">Januari</option>
+                                    <option value="02">Februari</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+
+                                <label for="">Tahun</label>
+                                <select class="" name="tahun" class="form-control" style="margin-right:15px;">
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                </select>
+
+                                <input type="submit" class="btn btn-primary" name="name" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                    <!--./form--->
+                    <table class="table table-bordered table-responsive table-hover">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Nomor Surat</th>
+                            <th>Perihal</th>
+                            <th>Dari</th>
+                            <th>Keterangan</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if masuks %}
+                            {% for foo in masuks %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ foo.tanggal|date:"d-m-Y" }}</td>
+                                    <td>{{ foo.nomor_surat }}</td>
+                                    <td>{{ foo.perihal }}</td>
+                                    <td>{{ foo.dari }}</td>
+                                    <td>{{ foo.keterangan }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="4"><center><span class="">Maaf kawan, Tidak ada data. Silahkan pilih bulan lain atau masukan data baru <i class="fa fa-smile-o"></i></span></center></td></tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    <br>
+                    <a href="/tatausaha/suratmasuk/tambah/" class="btn btn-primary">tambah <i class="fa fa-plus-circle"></i></a>
+                </div>
+            </div>
+            <!--./panel-body--->
+        </div>
+    </div>
+    </div>
+{% endblock content %}

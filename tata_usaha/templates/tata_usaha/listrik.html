@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Listrik {% now "Y" %} </h1>
+            <ol class="breadcrumb" style="margin-bottom: 5px;">
+                <li><a href="/"><i class="fa fa-home"></i> Beranda</a></li>
+                <li class="active">listrik</li>
+            </ol>
+            <br/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><i class="wi wi-lightning"> Rekap pemadaman listrik</i></h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class=" table table-hover table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Mulai</th>
+                                <th>Berakhir</th>
+                                <th>Kondisi BBM</th>
+                                <th>Keterangan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if listrik %}
+                                {% for foo in listrik %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ foo.tanggal|date:"d-m-Y" }}</td>
+                                        <td>{{ foo.jam_mulai|time:"H:i:s" }}</td>
+                                        <td>{{ foo.jam_berakhir|time:"H:i:s" }}</td>
+                                        <td>{{ foo.kondisi_bbm }}</td>
+                                        <td>{{ foo.keterangan }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pager">
+                        {% if listrik.has_previous %}
+                            <li class="previous">
+                                <a href="?page={{ listrik.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+
+                        <li class="current">
+                            Page {{ listrik.number }} of {{ listrik.paginator.num_pages }}
+
+                        </li>
+
+                        {% if listrik.has_next %}
+                            <li class="next">
+                                <a href="?page={{ listrik.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

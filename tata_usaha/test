@@ -1,0 +1,18 @@
+                <ul class="pager">
+                  {% if diklat.has_previous %}
+                  <li class="previous">
+                    <a href="?page={{ diklat.previous_page_number }}">Previous</a>
+                  </li>
+                  {% endif %}
+
+                  <li class="current">
+                    Page {{ diklat.number }} of {{ diklat.paginator.num_pages }}
+
+                  </li>
+
+                  {% if diklat.has_next %}
+                    <li class="next">
+                      <a href="?page={{ diklat.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>

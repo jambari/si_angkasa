@@ -1,0 +1,81 @@
+{% extends "layout/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="title">Pegawai</h1>
+            <ol class="breadcrumb" style="margin-bottom:5px; ">
+                <li><a href="/"><i class="fa fa-home"></i> Beranda</a></li>
+                <li class="active">Pegawai</li>
+            </ol>
+            </br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><i class="fa fa-users"></i> Daftar Pegawai</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-responsive table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NIP</th>
+                                    <th>Afiliasi</th>
+                                    <th><i class="fa fa-edit"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if options %}
+                                    {% for option in options %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ option.nama }}</td>
+                                            <td>{{ option.nip }}</td>
+                                            <td>{{ option.bagian }}</td>
+                                            <td><a href="" class="label label-warning"><i class="fa fa-edit"></i></a> <a
+                                                    href="" class="label label-danger"><i class="fa fa-eraser"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                {% endif %}
+                                </tbody>
+
+                            </table>
+
+                            <ul class="pager">
+                                {% if options.has_previous %}
+                                    <li class="previous">
+                                        <a href="?page={{ options.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% endif %}
+
+                                <li class="current">
+                                    Page {{ options.number }} of {{ options.paginator.num_pages }}
+
+                                </li>
+
+                                {% if options.has_next %}
+                                    <li class="next">
+                                        <a href="?page={{ options.next_page_number }}">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <br>
+                    <a href="/tatausaha/pegawai/tambah/" class="btn btn-primary">tambah pegawai <i
+                            class="fa fa-plus-circle"></i></a>
+                </div>
+            </div>
+            <!--./panel-body--->
+        </div>
+    </div>
+    </div>
+{% endblock content %}

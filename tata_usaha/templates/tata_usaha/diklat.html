@@ -1,0 +1,82 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Daftar Diklat {% now "Y" %} </h1>
+            <ol class="breadcrumb" style="margin-bottom: 5px;">
+                <li><a href="/"><i class="fa fa-home"></i> Beranda</a></li>
+                <li class="active">Diklat</li>
+            </ol>
+            <br/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><i class="fa fa-book"> Daftar Diklat</i></h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class=" table table-hover table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Diklat</th>
+                                <th>Nama Peserta</th>
+                                <th>Mulai</th>
+                                <th>Berakhir</th>
+                                <th>Lokasi</th>
+                                <th>Presentasi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if diklat %}
+                                {% for foo in diklat %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ foo.nama_diklat }}</td>
+                                        <td>{{ foo.nama_peserta }}</td>
+                                        <td>{{ foo.waktu_mulai }}</td>
+                                        <td>{{ foo.waktu_berakhir }}</td>
+                                        <td>{{ foo.lokasi }}</td>
+                                        <td>
+                                            {% if foo.presentasi %}
+                                                <span class="label label-success">Sudah</span>
+                                            {% else %}
+                                                <span class="label label-danger">Belum</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pager">
+                        {% if diklat.has_previous %}
+                            <li class="previous">
+                                <a href="?page={{ diklat.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+
+                        <li class="current">
+                            Page {{ diklat.number }} of {{ diklat.paginator.num_pages }}
+
+                        </li>
+
+                        {% if diklat.has_next %}
+                            <li class="next">
+                                <a href="?page={{ diklat.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
